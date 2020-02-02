@@ -18,7 +18,7 @@ typedef struct node
 node;
 
 // Number of buckets in hash table
-const unsigned int N = 10000;
+const unsigned int N = 100000;
 
 // Hash table.
 node *table[N];
@@ -63,9 +63,10 @@ unsigned int hash(const char *word)
     int hash = 7;
     for (int i = 0, l = strlen(word); i < l; i++)
     {
-        hash = (hash*31 + word[i]) % N;
+        hash = (hash * 31 + word[i]);
     }
-    return hash;
+
+    return hash % N;
 }
 
 
@@ -74,7 +75,7 @@ unsigned int hash(const char *word)
 bool load(const char *dictionary)
 {
     //open dictionary file
-    FILE* fp_dictionary = fopen(dictionary, "r");
+    FILE *fp_dictionary = fopen(dictionary, "r");
     if (fp_dictionary == NULL)
     {
         printf("Failed to fopen %s\n", dictionary);
@@ -115,13 +116,10 @@ bool load(const char *dictionary)
             word[index] = c;
             index++;
         }
-
-        //prematurely stop loading
-        //if (strcmp(word, "able") == 0)
-        //{
-        //    return true;
-        //}
     }
+
+    //close file
+    fclose(fp_dictionary);
 
     return true;
 }
@@ -131,8 +129,23 @@ bool load(const char *dictionary)
 // Returns number of words in dictionary if loaded else 0 if not yet loaded
 unsigned int size(void)
 {
-    // TODO
-    return 0;
+    //initialise variables
+    int counter = 0;
+    node *temp = NULL;
+
+    //loop through hash table, incrementing counter by 1 for each non-null pointer
+    for (int i = 0; i < N; i++)
+    {
+        temp = table[i];
+
+        while (temp != NULL)
+        {
+            counter++;
+            temp = temp -> next;
+        }
+    }
+
+    return counter;
 }
 
 
@@ -140,8 +153,23 @@ unsigned int size(void)
 // Unloads dictionary from memory, returning true if successful else false
 bool unload(void)
 {
-    // TODO
-    return false;
+    //initialise variables. by construction, temp_prev -> next = temp
+    node *temp = NULL;
+    node *temp_prev = NULL;
+
+    //loop through table, freeing all the mallocs
+    for (int i = 0; i < N; i++)
+    {
+        temp = table[i];
+        while (temp != NULL)
+        {
+            temp_prev = temp;
+            temp = temp -> next;
+            free(temp_prev);
+        }
+    }
+
+    return true;
 }
 
 
@@ -196,11 +224,4 @@ bool load_word(const char *word)
     strcpy(temp -> word, word);
 
     return true;
-}
-
-
-
-void test(void)
-{
-
 }
