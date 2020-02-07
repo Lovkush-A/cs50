@@ -13,3 +13,5 @@ Problem Set 4: Memory and pointers. Task 4a was interesting as we created filter
 
 Problem Set 5: Data structures.  In Task 5, we had to create a spell-checker using hash-tables.  Up till now I have been debugging using printf, but this exercise revealed to me the utility of a proper debugging tool. It is satisfying to see hash tables get filled in one-by-one!
 
+Problem Set 6: Introduction to Python. Tasks 6a-d were reimplementing tasks from Problem Set 1 and Problem Set 2a in python. Task 6e was about implementing a DNA test: given a dna sequence and a database of 'dna fingerprints', find a match if there is one. This week was much easier than the previous three Problem Set.
+
