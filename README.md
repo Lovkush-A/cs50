@@ -15,3 +15,5 @@ Problem Set 5: Data structures.  In Task 5, we had to create a spell-checker usi
 
 Problem Set 6: Introduction to Python. Tasks 6a-d were reimplementing tasks from Problem Set 1 and Problem Set 2a in python. Task 6e was about implementing a DNA test: given a dna sequence and a database of 'dna fingerprints', find a match if there is one. This week was much easier than the previous three Problem Set.
 
+Problem Set 7: SQL. 7a was all about getting used to SQL commands. 7b was about using python to update a database and then run SQL commands on that database and printint some output.
+
